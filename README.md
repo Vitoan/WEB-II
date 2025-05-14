@@ -5,45 +5,26 @@ Trabajo integrador de WEB II
 
 ## Entidades Principales
 
-## Paciente
+## class Paciente 
+{
+  +idPaciente: int
+  +nombre: string
+  +apellido: string
+  +dni: string
+  +fechaNacimiento: Date
+  +sexo: string
+  +telefono: string
+  +direccion: string
+}
 
--   **id_paciente**  (PK)
-    
--   nombre
-    
--   apellido
-    
--   fecha_nacimiento
-    
--   sexo
-    
--   documento
-    
--   dirección
-    
--   teléfono
-    
--   email
-    
--   contacto_emergencia
-    
-
-## Admisión
-
--   **id_admision**  (PK)
-    
--   fecha_admision
-    
--   motivo
-    
--   estado (activa, cancelada, finalizada)
-    
--   tipo_admision (programada, urgencia, derivación)
-    
--   **id_paciente**  (FK)
-    
--   usuario_registro (FK a Usuario)
-    
+## class Admisión
+ {
+  +idAdmision: int
+  +fechaHoraIngreso: DateTime
+  +tipoAdmision: enum {Urgencia, Programada}
+  +estado: enum {Activa, Finalizada}
+  +motivoConsulta: string
+}
 
 ## Habitación
 
@@ -145,6 +126,41 @@ Trabajo integrador de WEB II
     
 -   Un  **Usuario**  puede registrar admisiones y realizar evaluaciones.
 ### Modelo de casos de uso
+Actores del sistema 🎭
+| Actor         | Descripción breve                                        |
+| ------------- | -------------------------------------------------------- |
+| Administrador | Gestiona usuarios, configuraciones y controla el sistema |
+| Médico        | Realiza diagnósticos, prescribe tratamientos             |
+| Enfermero     | Registra signos vitales, ayuda en atención básica        |
+| Paciente      | Es admitido, internado, evaluado y dado de alta          |
+| Recepcionista | Admite pacientes y crea su ficha inicial                 |
+
+Entidades principales 🧱
+| Entidad         | Atributos clave                                               |
+| --------------- | ------------------------------------------------------------- |
+| **Paciente**    | id, nombre, apellido, DNI, fechaNacimiento, género, dirección |
+| **Internación** | id, idPaciente, fechaIngreso, fechaAlta, motivo               |
+| **Evaluación**  | id, idInternación, tipo (médica/enfermería), fecha, notas     |
+| **Habitación**  | id, número, tipo, disponibilidad                              |
+| **Diagnóstico** | id, idEvaluacion, detalle                                     |
+| **Tratamiento** | id, idDiagnóstico, medicamento, dosis, frecuencia             |
+| **Usuario**     | id, nombreUsuario, contraseña, rol                            |
+
+Relaciones entre entidades
+
+-    Un Paciente puede tener muchas Internaciones
+
+-   Una Internación tiene muchas Evaluaciones
+
+-    Una Evaluación puede ser de tipo médica o de enfermería
+
+-    Una Evaluación médica genera un Diagnóstico
+
+-    Un Diagnóstico puede generar muchos Tratamientos
+
+-    Una Internación se asocia a una Habitación
+
+-    Un Usuario puede registrar Evaluaciones
 ### Front
 ### Back
 ### BD
