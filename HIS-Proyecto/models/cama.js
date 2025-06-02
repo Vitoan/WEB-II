@@ -14,12 +14,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cama.init({
-    id_habitacion: DataTypes.INTEGER,
-    estado: DataTypes.ENUM,
-    sexo_ocupante: DataTypes.ENUM
+    id_cama: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    id_habitacion: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    estado: {
+      type: DataTypes.ENUM('libre', 'ocupada', 'en_limpieza'),
+      allowNull: false,
+      defaultValue: 'libre'
+    },
+    sexo_ocupante: {
+      type: DataTypes.ENUM('M', 'F'),
+      defaultValue: null
+    }
   }, {
     sequelize,
     modelName: 'Cama',
+    tableName: 'camas',
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
   return Cama;
 };

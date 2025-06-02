@@ -3,28 +3,38 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Camas', {
-      id: {
-        allowNull: false,
+      id_cama: {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
       id_habitacion: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Habitacions', // Assuming the table name is 'Habitacions'
+          key: 'id_habitacion'
+        },
+        onDelete: 'RESTRICT',
       },
       estado: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('libre', 'ocupada', 'en_limpieza'),
+        allowNull: false,
+        defaultValue: 'libre'
       },
       sexo_ocupante: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('M', 'F'),
+        defaultValue: null
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
       }
     });
   },
