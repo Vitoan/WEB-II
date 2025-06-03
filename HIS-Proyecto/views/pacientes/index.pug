@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2 Lista de Pacientes
+  a(href='/pacientes/create') Nuevo Paciente
+  if pacientes.length
+    table
+      thead
+        tr
+          th Nombre
+          th Apellido
+          th DNI
+          th Acciones
+      tbody
+        each paciente in pacientes
+          tr
+            td= paciente.nombre
+            td= paciente.apellido
+            td= paciente.dni
+            td
+              a(href=`/pacientes/${paciente.id_paciente}`) Ver
+  else
+    p No hay pacientes registrados.

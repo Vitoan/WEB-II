@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  h2 Nuevo Paciente
+  form(action='/pacientes', method='POST')
+    label Nombre:
+    input(type='text', name='nombre', required)
+    br
+    label Apellido:
+    input(type='text', name='apellido', required)
+    br
+    label DNI:
+    input(type='text', name='dni', required)
+    br
+    label Fecha de Nacimiento:
+    input(type='date', name='fecha_nacimiento', required)
+    br
+    label Sexo:
+    select(name='sexo', required)
+      option(value='M') Masculino
+      option(value='F') Femenino
+    br
+    label Dirección:
+    input(type='text', name='direccion')
+    br
+    label Teléfono:
+    input(type='text', name='telefono')
+    br
+    label Contacto de Emergencia:
+    input(type='text', name='contacto_emergencia')
+    br
+    label Seguro Médico:
+    input(type='text', name='seguro_medico')
+    br
+    button(type='submit') Guardar

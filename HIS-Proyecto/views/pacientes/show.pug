@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h2 Detalles del Paciente
+  p <strong>Nombre:</strong> #{paciente.nombre}
+  p <strong>Apellido:</strong> #{paciente.apellido}
+  p <strong>DNI:</strong> #{paciente.dni}
+  p <strong>Fecha de Nacimiento:</strong> #{paciente.fecha_nacimiento.toISOString().split('T')[0]}
+  p <strong>Sexo:</strong> #{paciente.sexo === 'M' ? 'Masculino' : 'Femenino'}
+  p <strong>Dirección:</strong> #{paciente.direccion || 'N/A'}
+  p <strong>Teléfono:</strong> #{paciente.telefono || 'N/A'}
+  p <strong>Contacto de Emergencia:</strong> #{paciente.contacto_emergencia || 'N/A'}
+  p <strong>Seguro Médico:</strong> #{paciente.seguro_medico || 'N/A'}
+  a(href='/pacientes') Volver
