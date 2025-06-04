@@ -24,5 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Admision',
   });
+  Admision.associate = function(models) {
+  Admision.belongsTo(models.Paciente, { foreignKey: 'id_paciente', as: 'paciente' });
+  Admision.belongsTo(models.Cama, { foreignKey: 'id_cama', as: 'cama' });
+  Admision.belongsTo(models.Usuario, { foreignKey: 'id_usuario', as: 'usuario' });
+  Admision.hasOne(models.HistorialMedico, { foreignKey: 'id_admision', as: 'historial' });
+};
   return Admision;
 };

@@ -21,5 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Habitacion',
   });
+  Habitacion.associate = function(models) {
+  Habitacion.belongsTo(models.Ala, { foreignKey: 'id_ala', as: 'ala' });
+  Habitacion.hasMany(models.Cama, { foreignKey: 'id_habitacion', as: 'camas' });
+};
   return Habitacion;
 };

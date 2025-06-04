@@ -43,5 +43,9 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });
+  Paciente.associate = function(models) {
+  Paciente.hasMany(models.Admision, { foreignKey: 'id_paciente', as: 'admisiones' });
+  Paciente.hasMany(models.HistorialMedico, { foreignKey: 'id_paciente', as: 'historiales' });
+};
   return Paciente;
 };

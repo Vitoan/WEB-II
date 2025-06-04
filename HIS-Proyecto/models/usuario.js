@@ -22,5 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Usuario',
   });
-  return Usuario;
+ Usuario.associate = function(models) {
+  Usuario.hasMany(models.Admision, { foreignKey: 'id_usuario', as: 'admisiones' });
+  Usuario.hasMany(models.HistorialMedico, { foreignKey: 'id_usuario', as: 'historiales' });
+};
+return Usuario;
 };

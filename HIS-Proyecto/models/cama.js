@@ -40,5 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });
-  return Cama;
+  Cama.associate = function(models) {
+  Cama.belongsTo(models.Habitacion, { foreignKey: 'id_habitacion', as: 'habitacion' });
+  Cama.hasOne(models.Admision, { foreignKey: 'id_cama', as: 'admision' });
+};
+return Cama;
 };
